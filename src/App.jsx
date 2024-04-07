@@ -27,11 +27,12 @@ function App() {
     passwordRef.current?.select();
     passwordRef.current?.setSelectionRange(0, 15);
     window.navigator.clipboard.writeText(password);
+    // Set the 'copied' state to true
     setCopied(true);
+    // After 700 milliseconds, set the 'copied' state back to false
     setTimeout(() => {
       setCopied(false);
     }, 700);
-  }, [password]);
 
   useEffect(() => {
     passwordGenerator();
@@ -51,13 +52,17 @@ function App() {
         />
         <button
           onClick={copyPasswordToClipboard}
-          className={`outline-none bg-blue-700 text-white px-3 py-1 ${
-            copied ? "text-green-500" : ""
-          }`}
+          className={`outline-none bg-blue-700 text-white px-3 py-1 ${copied ? "text-green-200 text-sm" : ""}`}
           style={{ transition: "color 0.3s ease" }}
         >
-          {copied ? "Copied!" : "Copy"}
+          {copied ? "Copied" : "Copy"}
         </button>
+{/*         This code creates a button that, when clicked, calls the copyPasswordToClipboard function.
+        The button's text changes to "Copied" if the copied state is true, indicating that the password has been copied.
+        The text color changes to green when the password is copied.
+        The button has a transition effect for the color property, which makes the color change smooth. */}
+
+
       </div>
       <div className="flex text-sm gap-x-2">
         <div className="flex items-center gap-x-1">
