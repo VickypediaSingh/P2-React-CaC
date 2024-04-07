@@ -21,7 +21,7 @@ function App() {
     }
 
     setPassword(pass);
-  }, [length, numberAllowed, charAllowed, setPassword]);
+  }, [length, numberAllowed, charAllowed, setPassword]); //setPassword is optional but better for optimisation
 
   const copyPasswordToClipboard = useCallback(() => {
     passwordRef.current?.select();
