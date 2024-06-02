@@ -61,10 +61,6 @@ function App() {
         >
           {copied ? "Copied" : "Copy"}
         </button>
-        {/*         This code creates a button that, when clicked, calls the copyPasswordToClipboard function.
-        The button's text changes to "Copied" if the copied state is true, indicating that the password has been copied.
-        The text color changes to green when the password is copied.
-        The button has a transition effect for the color property, which makes the color change smooth. */}
       </div>
       {/*  */}
       <div className="flex text-sm gap-x-2">
