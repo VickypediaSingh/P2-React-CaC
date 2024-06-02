@@ -6,7 +6,7 @@ function App() {
   const [charAllowed, setCharAllowed] = useState(false);
   const [password, setPassword] = useState("");
 
-  const passwordRef = useRef(null);
+  const passwordRef = useRef(null); //imp
   const [copied, setCopied] = useState(false);
 
   const passwordGenerator = useCallback(() => {
@@ -21,16 +21,22 @@ function App() {
     }
 
     setPassword(pass);
-  }, [length, numberAllowed, charAllowed, setPassword]);
+  }, [length, numberAllowed, charAllowed]);
 
   const copyPasswordToClipboard = useCallback(() => {
+    // Select the password input field
     passwordRef.current?.select();
-    passwordRef.current?.setSelectionRange(0, 999);
-    window.navigator.clipboard.writeText(password);
+    // Set the selection range, only for showing
+    passwordRef.current?.setSelectionRange(0, 15);
+    // 2 ways to copy the selected text to the clipboard
+    // window.navigator.clipboard.writeText(password);    this is direct tareeka
+    window.navigator.clipboard.writeText(passwordRef.current.value);
+    // Set copied state to true to show the "Copied!" message
     setCopied(true);
+    // Reset the copied state after 800 ms
     setTimeout(() => {
       setCopied(false);
-    }, 1000);
+    }, 800);
   }, [password]);
 
   useEffect(() => {
@@ -39,7 +45,9 @@ function App() {
 
   return (
     <div className="w-full max-w-md mx-auto shadow-md rounded-lg px-4 py-3 my-8 bg-gray-800 text-orange-500">
+      {/*  */}
       <h1 className="text-white text-center my-3">Password Generator</h1>
+      {/*  */}
       <div className="flex shadow rounded-lg overflow-hidden mb-4">
         <input
           type="text"
@@ -47,18 +55,19 @@ function App() {
           className="outline-none w-full py-1 px-3 bg-gray-900 text-white"
           placeholder="Password"
           readOnly
-          ref={passwordRef}
+          ref={passwordRef} //very imp step
         />
         <button
           onClick={copyPasswordToClipboard}
-          className={`outline-none bg-blue-700 text-white px-3 py-1 ${
-            copied ? "text-green-500" : ""
+          className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${
+            copied ? "bg-green-500" : ""
           }`}
-          style={{ transition: "color 0.3s ease" }}
+          style={{ transition: "background-color 0.3s ease" }}
         >
           {copied ? "Copied!" : "Copy"}
         </button>
       </div>
+      {/*  */}
       <div className="flex text-sm gap-x-2">
         <div className="flex items-center gap-x-1">
           <input
