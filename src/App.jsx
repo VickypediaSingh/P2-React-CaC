@@ -27,7 +27,7 @@ function App() {
     // Select the password input field
     passwordRef.current?.select();
     passwordRef.current?.setSelectionRange(0, 999);
-    window.navigator.clipboard.writeText(password);
+    window.navigator.clipboard.writeText(passwordRef.current.value);
     setCopied(true);
     setTimeout(() => {
       setCopied(false);
